@@ -11,5 +11,6 @@ class PatientController extends Controller
         $patient = Patient::findOrFail($id);
     }
 
+
     
 }
