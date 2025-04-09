@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 
 class PatientController extends Controller
 {
+
+    public function index(){
+        $patients = Patient::all();
+        if(!$patients){
+            return response()->json(['message' => 'There are no patients yet.']);
+        }
+        return response()->json($patients);
+    }
     public function store(Request $request)
     {
         $validated = $request->validate([
