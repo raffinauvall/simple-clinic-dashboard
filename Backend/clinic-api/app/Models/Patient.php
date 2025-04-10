@@ -7,5 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Patient extends Model
 {
+
+    protected $fillable = [
+        'name',
+        'gender',
+        'birth_date',
+        'phone',
+        'address'
+    ];
+
+    protected $casts = [
+        'birth_date' => 'date'
+    ];
     use HasFactory;
 }
