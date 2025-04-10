@@ -10,8 +10,8 @@ class PatientController extends Controller
 
     public function index(){
         $patients = Patient::all();
-        if(!$patients){
-            return response()->json(['message' => 'There are no patients yet.']);
+        if($patients->isEmpty()){
+            return response()->json(['message' => 'There are no patients yet.'],404);
         }
         return response()->json($patients);
     }
