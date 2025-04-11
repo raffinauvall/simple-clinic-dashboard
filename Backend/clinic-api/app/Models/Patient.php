@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Patient extends Model
 {
-
+    use HasFactory;
     protected $fillable = [
         'name',
         'gender',
@@ -15,9 +15,13 @@ class Patient extends Model
         'phone',
         'address'
     ];
-
     protected $casts = [
         'birth_date' => 'date'
     ];
-    use HasFactory;
+
+    public function medicalRecords()
+    {
+        return $this->hasMany(MedicalRecord::class);
+    }
+
 }
