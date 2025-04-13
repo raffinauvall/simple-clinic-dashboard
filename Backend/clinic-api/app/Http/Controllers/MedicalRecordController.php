@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class MedicalRecordController extends Controller
 {
+    // Function for getAll()
     public function index(){
         $medicalrecords = MedicalRecord::all();
 
@@ -16,6 +17,7 @@ class MedicalRecordController extends Controller
         return response()->json($medicalrecords);
     }
 
+    // Function for post()
     public function store(Request $request){
         $validated = $request->validate([
                 'patient_id' => 'required|exists:patients,id',
@@ -32,6 +34,7 @@ class MedicalRecordController extends Controller
     ],201);
     }
 
+    // Function for getById()
     public function show($id){
         $medicalrecords = MedicalRecord::find($id); 
         if (!$medicalrecords){
@@ -40,6 +43,7 @@ class MedicalRecordController extends Controller
         return response()->json($medicalrecords);
     }
 
+    // Function for update()
     public function update(Request $request,$id){
         $medicalrecords = MedicalRecord::find($id);
         if (!$medicalrecords){
@@ -58,6 +62,7 @@ class MedicalRecordController extends Controller
         ], 201);        
     }
 
+    // Function for delete()
     public function destroy($id){
         $medicalrecords = MedicalRecord::find($id);
         if(!$medicalrecords){
@@ -68,6 +73,7 @@ class MedicalRecordController extends Controller
         return response()->json(['message' => 'Successfully deleted.'],201);
     }
 
+    // Get record by calling patient_id
     public function getByPatient($patientId)
     {
         $medicalrecords = MedicalRecord::with('doctor', 'patient') 
