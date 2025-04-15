@@ -3,6 +3,7 @@
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\MedicalRecordController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\AppointmentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,3 +25,9 @@ Route::apiResource('doctors', DoctorController::class);
 
 Route::apiResource('medical-records', MedicalRecordController::class);
 Route::get('medical-records/patients/{patient_id}', [MedicalRecordController::class, 'getByPatient']);
+
+
+
+Route::apiResource('appointments', AppointmentController::class);
+Route::get('appointments/patient/{patientId}', [AppointmentController::class, 'getByPatientId']);
+
