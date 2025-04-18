@@ -19,6 +19,14 @@ class AppointmentController extends Controller
         return response()->json($appointments);
     }
 
+    public function show($id){
+        $appointments = Appointment::find($id);
+        if(!$appointments){
+            return response()->json(['message' => 'Appointment not found.'],404);
+        }
+        return response()->json($appointments);
+    }
+
     // Tambah appointment
     public function store(Request $request)
     {
