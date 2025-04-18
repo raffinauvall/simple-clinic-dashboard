@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
+use Dotenv\Exception\ValidationException;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -16,23 +17,41 @@ class PaymentController extends Controller
         return response()->json($payments);
     }
 
+
+
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'appointment_id' => 'required|exists:appointments,id',
-            'amount' => 'required|numeric',
-            'payment_method' => 'required|string',
-            'payment_date' => 'required|date',
-            'status' => 'required|string'
-        ]);
+        try {
+            $validated = $request->validate([
+                'patient_id' => 'required|exists:patients,id',
+                'appointment_id' => 'required|exists:appointments,id',
+                'amount' => 'required|numeric',
+                'payment_method' => 'required|string',
+                'paid_at' => 'nullable|date',
+                'status' => 'nullable|string|in:paid,unpaid,pending',
+                'notes' => 'nullable|string'
+            ]);
 
-        $payment = Payment::create($validated);
+            // Cek jika 'status' ada dan bernilai 'paid', serta 'paid_at' kosong
+            if (isset($validated['status']) && $validated['status'] === 'paid' && empty($validated['paid_at'])) {
+                $validated['paid_at'] = now(); // Set 'paid_at' ke waktu sekarang
+            }
 
-        return response()->json([
-            'message' => 'Payment successfully created.',
-            'data' => $payment
-        ], 201);
+            $payment = Payment::create($validated);
+
+            return response()->json([
+                'message' => 'Payment successfully created.',
+                'data' => $payment
+            ], 201);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return response()->json([
+                'message' => 'Validation failed.',
+                'errors' => $e->validator->errors()
+            ], 422);
+        }
     }
+
+
 
     public function show($id)
     {
@@ -53,8 +72,9 @@ class PaymentController extends Controller
         $validated = $request->validate([
             'amount' => 'sometimes|numeric',
             'payment_method' => 'sometimes|string',
-            'payment_date' => 'sometimes|date',
-            'status' => 'sometimes|string'
+            'paid_at' => 'sometimes|date',
+            'status' => 'sometimes|string',
+            'notes' => 'sometimes|string'
         ]);
 
         $payment->update($validated);
