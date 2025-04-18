@@ -63,7 +63,7 @@ class PatientController extends Controller
         return response()->json([
             'message' => 'Successfully updated.',
             'data' => $patients
-        ], 200);
+        ], 200);    
     }
 
 
