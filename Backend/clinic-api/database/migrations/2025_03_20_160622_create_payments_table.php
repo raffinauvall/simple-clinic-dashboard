@@ -18,6 +18,7 @@ return new class extends Migration
             $table->decimal('amount', 10, 2);
             $table->string('payment_method');
             $table->timestamp('paid_at')->nullable();
+            $table->enum('status', ['paid', 'unpaid', 'pending'])->default('unpaid');
             $table->text('notes')->nullable();
             $table->timestamps();
         });
