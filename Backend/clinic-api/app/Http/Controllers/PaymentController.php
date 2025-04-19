@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Payment;
-use Dotenv\Exception\ValidationException;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
+
+    // Show All
     public function index()
     {
         $payments = Payment::all();
@@ -18,7 +19,7 @@ class PaymentController extends Controller
     }
 
 
-
+    // Create
     public function store(Request $request)
     {
         try {
@@ -74,7 +75,7 @@ class PaymentController extends Controller
             'payment_method' => 'sometimes|string',
             'paid_at' => 'sometimes|date',
             'status' => 'sometimes|string',
-            'notes' => 'sometimes|string'
+            'notes' => 'nullable|string'
         ]);
 
         $payment->update($validated);
