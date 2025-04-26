@@ -1,1 +1,4 @@
-@import "tailwindcss" tes
+@import "tailwindcss";
+.recent {
+    width: 70% !important;
+}
