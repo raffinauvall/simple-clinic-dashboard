@@ -1,10 +1,10 @@
 import React from "react";
-import usePatient from "../hooks/usePatient";
+import usePatient from "../hooks/patient/usePatient";
 
 const Body = () => {
-    const {patients, loading, error} = usePatient();
-    if (loading) return <div>Loading...</div>
-    if (error) return <div>Something when wrong</div>
+  const { patients, loading, error } = usePatient();
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Something when wrong</div>;
   return (
     <div className="p-6">
       <div className="text-3xl font-bold text-black mb-5">
