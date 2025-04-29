@@ -1,17 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import usePatient from "../hooks/patient/usePatient";
+import CreatePatientModal from "./modals/PatientModal/CreatePatientModal";
 
 const Body = () => {
   const { patients, loading, error } = usePatient();
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
+
   if (loading) return <div>Loading...</div>;
-  if (error) return <div>Something when wrong</div>;
+  if (error) return <div>Something went wrong</div>;
+
   return (
     <div className="p-6">
       <div className="text-3xl font-bold text-black mb-5">
         Selamat Datang, admin
       </div>
+
       <div className="recent h-auto bg-white rounded-xl shadow-sm p-4">
-        <div className="text-2xl font-bold text-black">Patient</div>
+        <div className="flex items-center justify-between mb-4">
+          <div className="text-2xl font-bold text-black">Patient</div>
+          <button
+            onClick={() => setIsCreateOpen(true)}
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          >
+            Tambah Pasien
+          </button>
+        </div>
+
         <table className="w-full mt-4 table-auto">
           <thead>
             <tr className="bg-gray-200">
@@ -33,6 +47,13 @@ const Body = () => {
           </tbody>
         </table>
       </div>
+
+      {/* Modal Create Patient */}
+      <CreatePatientModal
+        isOpen={isCreateOpen}
+        onClose={() => setIsCreateOpen(false)}
+        // onSuccess nanti buat refetch
+      />
     </div>
   );
 };
