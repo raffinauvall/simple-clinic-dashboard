@@ -22,6 +22,7 @@ const CreatePatientModal = ({ isOpen, onClose, onSuccess }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData);
     await create(formData);
     onSuccess();
     onClose();
@@ -47,8 +48,8 @@ const CreatePatientModal = ({ isOpen, onClose, onSuccess }) => {
           required
         >
           <option value="">Pilih Gender</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
         </select>
         <input
           type="number"

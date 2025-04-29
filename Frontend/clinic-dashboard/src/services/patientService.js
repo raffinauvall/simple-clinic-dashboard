@@ -10,13 +10,13 @@ export const getPatientById = async (id) => {
     return response.data;
 }
 
-export const createPatient = async () => {
-    const response = await api.post("/patients");
+export const createPatient = async (data) => {
+    const response = await api.post("/patients", data);
     return response.data;
 }
 
-export const updatePatient = async (id) => {
-    const response = await api.put(`/patients/${id}`);
+export const updatePatient = async (id, data) => {
+    const response = await api.put(`/patients/${id}`, data);
     return response.data;
 }
 

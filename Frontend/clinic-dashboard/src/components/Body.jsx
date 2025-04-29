@@ -3,8 +3,14 @@ import usePatient from "../hooks/patient/usePatient";
 import CreatePatientModal from "./modals/PatientModal/CreatePatientModal";
 
 const Body = () => {
-  const { patients, loading, error } = usePatient();
+  const { patients, loading, error, refetch } = usePatient(); // pastikan ada refetch
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+
+  // Tambahkan handler untuk refresh data setelah tambah pasien
+  const handleSuccess = () => {
+    refetch(); // ambil ulang data pasien
+    setIsCreateOpen(false); // tutup modal
+  };
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Something went wrong</div>;
@@ -52,7 +58,7 @@ const Body = () => {
       <CreatePatientModal
         isOpen={isCreateOpen}
         onClose={() => setIsCreateOpen(false)}
-        // onSuccess nanti buat refetch
+        onSuccess={handleSuccess}
       />
     </div>
   );
