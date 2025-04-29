@@ -12,7 +12,7 @@ const useCreatePatient = () => {
             return response;
         } catch (err) {
             setError(err);
-        } finally {
+        } finally {      
             setLoading(false);
         }
     };
