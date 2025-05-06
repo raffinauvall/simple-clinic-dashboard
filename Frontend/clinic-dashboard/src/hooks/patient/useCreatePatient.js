@@ -5,7 +5,7 @@ const useCreatePatient = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const create = async (patientData) => {
+    const handleCreate = async (patientData) => {
         setLoading(true);
         try {
             const response = await createPatient(patientData);
@@ -17,7 +17,7 @@ const useCreatePatient = () => {
         }
     };
 
-    return { create, loading, error };
+    return { handleCreate, loading, error };
 };
 
 export default useCreatePatient;
