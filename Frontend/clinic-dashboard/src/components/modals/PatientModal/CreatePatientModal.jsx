@@ -4,7 +4,7 @@ import ModalWrapper from "../modalWrapper";
 import useCreatePatient from "../../../hooks/patient/useCreatePatient";
 
 const CreatePatientModal = ({ isOpen, onClose, onSuccess }) => {
-  const { create, loading, error } = useCreatePatient();
+  const { handleCreate, loading, error } = useCreatePatient();
   const [formData, setFormData] = useState({
     name: "",
     gender: "",
@@ -23,7 +23,7 @@ const CreatePatientModal = ({ isOpen, onClose, onSuccess }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
-    await create(formData);
+    await handleCreate(formData);
     onSuccess();
     onClose();
   };
