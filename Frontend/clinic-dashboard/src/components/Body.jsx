@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import usePatient from "../hooks/patient/usePatient";
 import CreatePatientModal from "./modals/PatientModal/CreatePatientModal";
+import EditPatientModal from "./modals/PatientModal/UpdatePatientModal";
 import useDeletePatient from "../hooks/patient/useDeletePatient";
 
 const Body = () => {
@@ -15,18 +16,23 @@ const Body = () => {
     loading: isDeleteLoading,
     error: deleteError,
   } = useDeletePatient();
+
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false); // buat modal edit
+  const [selectedPatient, setSelectedPatient] = useState(null); // data pasien yg mau diedit
 
   const handleSuccess = () => {
     refetch();
     setIsCreateOpen(false);
+    setIsEditOpen(false);
+    setSelectedPatient(null);
   };
 
   const onDelete = (id) => {
     if (confirm("Yakin mau hapus data ini?")) {
       handleDelete(id, () => {
         alert("Data berhasil dihapus");
-        refetch(); // Refresh data abis hapus
+        refetch();
       });
     }
   };
@@ -80,7 +86,8 @@ const Body = () => {
                     <button
                       className="text-blue-500 hover:underline"
                       onClick={() => {
-                        // nanti bisa navigate ke halaman edit
+                        setSelectedPatient(patient);
+                        setIsEditOpen(true);
                       }}
                     >
                       Edit
@@ -107,6 +114,16 @@ const Body = () => {
       <CreatePatientModal
         isOpen={isCreateOpen}
         onClose={() => setIsCreateOpen(false)}
+        onSuccess={handleSuccess}
+      />
+
+      <EditPatientModal
+        isOpen={isEditOpen}
+        onClose={() => {
+          setIsEditOpen(false);
+          setSelectedPatient(null);
+        }}
+        patient={selectedPatient}
         onSuccess={handleSuccess}
       />
     </div>
