@@ -7,6 +7,7 @@ const EditPatientModal = ({ isOpen, onClose, patient, onSuccess }) => {
     gender: "",
     phone: "",
     address: "",
+    birth_date: "",
   });
 
   const { handleUpdate, loading, error } = useUpdatePatient();
@@ -18,6 +19,9 @@ const EditPatientModal = ({ isOpen, onClose, patient, onSuccess }) => {
         gender: patient.gender || "",
         phone: patient.phone || "",
         address: patient.address || "",
+        birth_date: patient.birth_date
+          ? new Date(patient.birth_date).toISOString().slice(0, 10)
+          : "",
       });
     }
   }, [patient]);
@@ -31,7 +35,12 @@ const EditPatientModal = ({ isOpen, onClose, patient, onSuccess }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    handleUpdate(patient.id, formData, () => {
+    const formattedData = {
+      ...formData,
+      birth_date: new Date(formData.birth_date).toISOString().slice(0, 10),
+    };
+
+    handleUpdate(patient.id, formattedData, () => {
       alert("Berhasil diupdate");
       onSuccess();
       onClose();
@@ -41,7 +50,7 @@ const EditPatientModal = ({ isOpen, onClose, patient, onSuccess }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    <div className="fixed inset-0 bg-white-20 bg-opacity-30 flex justify-center items-center z-50">
       <div className="bg-white p-6 rounded-md w-full max-w-md">
         <h2 className="text-xl font-bold mb-4">Edit Pasien</h2>
         {error && <div className="text-red-500 mb-2">{error.message}</div>}
@@ -59,6 +68,14 @@ const EditPatientModal = ({ isOpen, onClose, patient, onSuccess }) => {
             onChange={onChange}
             placeholder="Gender"
             className="border p-2 w-full"
+          />
+          <input
+            name="birth_date"
+            value={formData.birth_date}
+            onChange={onChange}
+            placeholder="Birth Date"
+            className="border p-2 w-full"
+            type="date"
           />
           <input
             name="phone"
