@@ -3,6 +3,7 @@ import usePatient from "../hooks/patient/usePatient";
 import CreatePatientModal from "./modals/PatientModal/CreatePatientModal";
 import EditPatientModal from "./modals/PatientModal/UpdatePatientModal";
 import useDeletePatient from "../hooks/patient/useDeletePatient";
+import ModalStatus from "./modals/ModalStatus";
 
 const Body = () => {
   const {
@@ -17,6 +18,11 @@ const Body = () => {
     error: deleteError,
   } = useDeletePatient();
 
+  const [notif, setNotif] = useState({
+  isOpen: false,
+  type: "", // bisa "success", "error", dsb.
+  message: "",
+});
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false); // buat modal edit
   const [selectedPatient, setSelectedPatient] = useState(null); // data pasien yg mau diedit
@@ -125,6 +131,12 @@ const Body = () => {
         }}
         patient={selectedPatient}
         onSuccess={handleSuccess}
+      />
+      <ModalStatus
+        isOpen={notif.isOpen}
+        type={notif.type}
+        message={notif.message}
+        onClose={() => setNotif({ ...notif, isOpen: false })}
       />
     </div>
   );
