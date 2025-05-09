@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { deletePatient } from "../../services/patientService";
+import { toast } from "sonner";
 
 
 const useDeletePatient = () => {
@@ -12,8 +13,10 @@ const useDeletePatient = () => {
         try{
             await deletePatient(id);
             if (onSuccess) onSuccess()
+            toast.success('Data berhasil dihapus')
         } catch (err){
             setError(err);
+            toast.error('Gagal menghapus data')
         } finally{
             setLoading(false);
         }
