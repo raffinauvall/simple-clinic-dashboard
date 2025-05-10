@@ -41,7 +41,6 @@ const EditPatientModal = ({ isOpen, onClose, patient, onSuccess }) => {
     };
 
     handleUpdate(patient.id, formattedData, () => {
-      alert("Berhasil diupdate");
       onSuccess();
       onClose();
     });
