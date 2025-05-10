@@ -3,7 +3,7 @@ import usePatient from "../hooks/patient/usePatient";
 import CreatePatientModal from "./modals/PatientModal/CreatePatientModal";
 import EditPatientModal from "./modals/PatientModal/UpdatePatientModal";
 import useDeletePatient from "../hooks/patient/useDeletePatient";
-import ModalStatus from "./modals/ModalStatus";
+import DeleteConfirmationModal from "./modals/DeleteConfirmationModal"
 
 const Body = () => {
   const {
@@ -18,14 +18,14 @@ const Body = () => {
     error: deleteError,
   } = useDeletePatient();
 
-  const [notif, setNotif] = useState({
-  isOpen: false,
-  type: "", // bisa "success", "error", dsb.
-  message: "",
-});
+  
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false); // buat modal edit
   const [selectedPatient, setSelectedPatient] = useState(null); // data pasien yg mau diedit
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const [selectedDeleteId, setSelectedDeleteId] = useState(null);
+
+
 
   const handleSuccess = () => {
     refetch();
@@ -35,13 +35,20 @@ const Body = () => {
   };
 
   const onDelete = (id) => {
-    if (confirm("Yakin mau hapus data ini?")) {
-      handleDelete(id, () => {
-        alert("Data berhasil dihapus");
-        refetch();
-      });
-    }
+    setSelectedDeleteId(id);
+    setOpenDeleteModal(true);
   };
+
+  const confirmDelete = () => {
+    if (!selectedDeleteId) return;
+
+    handleDelete(selectedDeleteId, () => {
+      setOpenDeleteModal(false);
+      setSelectedDeleteId(null);
+      refetch();
+    });
+  };
+  
 
   if (isPatientLoading) return <div>Loading data pasien...</div>;
   if (patientError) return <div>Error saat ambil data pasien</div>;
@@ -132,11 +139,14 @@ const Body = () => {
         patient={selectedPatient}
         onSuccess={handleSuccess}
       />
-      <ModalStatus
-        isOpen={notif.isOpen}
-        type={notif.type}
-        message={notif.message}
-        onClose={() => setNotif({ ...notif, isOpen: false })}
+      <DeleteConfirmationModal
+        isOpen={openDeleteModal}
+        onClose={() => {
+          setOpenDeleteModal(false);
+          setSelectedDeleteId(null);
+        }}
+        onConfirm={confirmDelete}
+        loading={isDeleteLoading}
       />
     </div>
   );
