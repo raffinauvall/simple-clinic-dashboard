@@ -4,6 +4,10 @@ import CreatePatientModal from "./modals/PatientModal/CreatePatientModal";
 import EditPatientModal from "./modals/PatientModal/UpdatePatientModal";
 import useDeletePatient from "../hooks/patient/useDeletePatient";
 import DeleteConfirmationModal from "./modals/DeleteConfirmationModal"
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+library.add(faTrash, faEdit)
 
 const Body = () => {
   const {
@@ -78,7 +82,7 @@ const Body = () => {
             </div>
           )}
 
-          <table className="min-w-full table-auto">
+          <table className="min-w-full table-auto md:table-auto">
             <thead>
               <tr className="bg-gray-200 text-sm sm:text-base">
                 <th className="p-2 text-left">Name</th>
@@ -97,22 +101,22 @@ const Body = () => {
                   <td className="p-2">{patient.address}</td>
                   <td className="p-2 space-x-2">
                     <button
-                      className="text-blue-500 hover:underline"
+                      className="bg-blue-500 px-2 py-1 rounded-sm text-white hover:bg-blue-800"
                       onClick={() => {
                         setSelectedPatient(patient);
                         setIsEditOpen(true);
                       }}
                     >
-                      Edit
+                      <FontAwesomeIcon icon="edit"/>
                     </button>
                     <button
-                      className={`text-red-500 hover:underline ${
+                      className={`bg-red-500 px-2 py-1 rounded-sm text-white hover:bg-red-800 ${
                         isDeleteLoading ? "opacity-50 cursor-not-allowed" : ""
                       }`}
                       onClick={() => onDelete(patient.id)}
                       disabled={isDeleteLoading}
                     >
-                      {isDeleteLoading ? "Deleting..." : "Delete"}
+                      <FontAwesomeIcon icon="trash" />
                     </button>
                   </td>
                 </tr>
