@@ -92,36 +92,45 @@ const Body = () => {
                 <th className="p-2 text-left">Action</th>
               </tr>
             </thead>
-            <tbody>
-              {patients.map((patient) => (
-                <tr key={patient.id} className="border-b text-sm sm:text-base">
-                  <td className="p-2">{patient.name}</td>
-                  <td className="p-2">{patient.gender}</td>
-                  <td className="p-2">{patient.phone}</td>
-                  <td className="p-2">{patient.address}</td>
-                  <td className="p-2 space-x-2">
-                    <button
-                      className="bg-blue-500 px-2 py-1 rounded-sm text-white hover:bg-blue-800"
-                      onClick={() => {
-                        setSelectedPatient(patient);
-                        setIsEditOpen(true);
-                      }}
-                    >
-                      <FontAwesomeIcon icon="edit"/>
-                    </button>
-                    <button
-                      className={`bg-red-500 px-2 py-1 rounded-sm text-white hover:bg-red-800 ${
-                        isDeleteLoading ? "opacity-50 cursor-not-allowed" : ""
-                      }`}
-                      onClick={() => onDelete(patient.id)}
-                      disabled={isDeleteLoading}
-                    >
-                      <FontAwesomeIcon icon="trash" />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
+           <tbody>
+  {patients.length === 0 ? (
+    <tr>
+      <td colSpan="5" className="text-center text-gray-500 py-4">
+        Belum ada pasien.
+      </td>
+    </tr>
+  ) : (
+    patients.map((patient) => (
+      <tr key={patient.id} className="border-b text-sm sm:text-base">
+        <td className="p-2">{patient.name}</td>
+        <td className="p-2">{patient.gender}</td>
+        <td className="p-2">{patient.phone}</td>
+        <td className="p-2">{patient.address}</td>
+        <td className="p-2 space-x-2">
+          <button
+            className="bg-blue-500 px-2 py-1 rounded-sm text-white hover:bg-blue-800"
+            onClick={() => {
+              setSelectedPatient(patient);
+              setIsEditOpen(true);
+            }}
+          >
+            <FontAwesomeIcon icon="edit" />
+          </button>
+          <button
+            className={`bg-red-500 px-2 py-1 rounded-sm text-white hover:bg-red-800 ${
+              isDeleteLoading ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+            onClick={() => onDelete(patient.id)}
+            disabled={isDeleteLoading}
+          >
+            <FontAwesomeIcon icon="trash" />
+          </button>
+        </td>
+      </tr>
+    ))
+  )}
+</tbody>
+
           </table>
         </div>
 
