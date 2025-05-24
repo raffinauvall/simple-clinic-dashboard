@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import usePatient from "../hooks/patient/usePatient";
-import CreatePatientModal from "./modals/PatientModal/CreatePatientModal";
-import EditPatientModal from "./modals/PatientModal/UpdatePatientModal";
-import useDeletePatient from "../hooks/patient/useDeletePatient";
-import DeleteConfirmationModal from "./modals/DeleteConfirmationModal"
+import usePatient from "../../hooks/patient/usePatient";
+import CreatePatientModal from "../modals/PatientModal/CreatePatientModal";
+import EditPatientModal from "../modals/PatientModal/UpdatePatientModal";
+import useDeletePatient from "../../hooks/patient/useDeletePatient";
+import DeleteConfirmationModal from "../modals/DeleteConfirmationModal"
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
