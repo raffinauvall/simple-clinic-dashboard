@@ -16,7 +16,7 @@ const Layout = ({ children }) => {
       <main
         className={`transition-all duration-300 ease-in-out ${
           isSidebarOpen ? "ml-64" : "ml-0"
-        } flex-1 min-h-[100dvh] overflow-y-auto bg-gray-100 p-6 md:ml-64`} // Default ml-64 for md and up
+        } flex-1 min-h-[100dvh] overflow-y-auto bg-white p-6 md:ml-64`} // Default ml-64 for md and up
       >
         {/* Button for toggling sidebar on mobile */}
         <button
