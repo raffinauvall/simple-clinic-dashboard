@@ -59,11 +59,20 @@ const Body = () => {
 
   return (
     <div className="p-4 sm:p-6">
-      <div className="text-2xl sm:text-3xl font-bold text-black mb-4 sm:mb-5">
-        Selamat Datang, admin
+      <div className="text-2xl sm:text-3xl font-bold text-black mb-4 sm:mb-5 euclid-bold">
+        Good Night, admin 
       </div>
-      <div className="content flex flex-col md:flex-row gap-4">
-        <div className="recent w-full md:w-3/4 bg-white rounded-xl shadow-sm p-4 overflow-x-auto">
+      <div className="flex justify-center gap-5 mb-6">
+        <div className="patient bg-white h-40 rounded-xl w-100 p-5">
+          <div className="text-xl euclid-medium">
+            Patient
+          </div>
+        </div>
+        <div className="doctor bg-white h-40 rounded-xl w-100"></div>
+        <div className="appointment bg-white h-40 rounded-xl w-100"></div>
+      </div>
+      <div className="content flex">
+        <div className="recent w-full  bg-white rounded-xl shadow-sm p-4 overflow-x-auto">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
             <div className="text-xl sm:text-2xl font-bold text-black">
               Patient
@@ -84,7 +93,7 @@ const Body = () => {
 
           <table className="min-w-full table-auto md:table-auto">
             <thead>
-              <tr className="bg-gray-200 text-sm sm:text-base">
+              <tr className="bg-gray-200 text-sm sm:text-base font-euclid">
                 <th className="p-2 text-left">Name</th>
                 <th className="p-2 text-left">Gender</th>
                 <th className="p-2 text-left">Phone</th>
@@ -134,7 +143,7 @@ const Body = () => {
           </table>
         </div>
 
-        <div className="w-full md:w-1/4 shadow-sm rounded-lg bg-white h-30"></div>
+       
       </div>
 
       <CreatePatientModal
