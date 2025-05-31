@@ -13,7 +13,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       {/* Hamburger Button for mobile */}
       <button
         onClick={toggleSidebar}
-        className="md:hidden p-4 text-gray-800 bg-gray-100 fixed top-0 left-0 z-50"
+        className="md:hidden p-4 text-gray-800 fixed top-0 left-0 z-50"
       >
         ☰
       </button>
@@ -22,19 +22,16 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       <aside
         className={`${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } w-64 h-screen bg-gray-200 text-white fixed top-0 left-0 transform transition-transform duration-300 z-40 md:translate-x-0`}
+        } md:w-64 w-full h-screen bg-white text-white fixed top-0 left-0 transform transition-transform duration-300 pt-5 z-40 md:translate-x-0`}
       >
-        <div className="text-center text-3xl font-bold py-4">
-          <span className="text-blue-600">MedPrime</span>
+        <div className="text-center text-4xl euclid-bold py-4">
+          <span className="text-black">Med</span>
+          <span className="text-[#0527E6]">Prime</span>
         </div>
-        <nav className="flex flex-col gap-1 p-4 text-black">
-          <SidebarItem className="hover:text-white" icon={faTachometerAlt} label="Dashboard" to="/" />
+        <nav className="flex flex-col gap-5 p-4 text-black">
+          <SidebarItem icon={faTachometerAlt} label="Dashboard" to="/" />
           <SidebarItem icon={faUserInjured} label="Patients" to="/patients" />
-          <SidebarItem
-            icon={faCalendarCheck}
-            label="Appointments"
-            to="/appointments"
-          />
+          <SidebarItem icon={faCalendarCheck} label="Appointments" to="/appointments" />
           <SidebarItem icon={faMoneyBillWave} label="Payments" to="/payments" />
         </nav>
       </aside>
@@ -46,8 +43,8 @@ const SidebarItem = ({ icon, label, to }) => (
   <NavLink
     to={to}
     className={({ isActive }) =>
-      `flex items-center gap-3 px-3 py-2 rounded transition-colors duration-200 text-sm sm:text-base ${
-        isActive ? "bg-blue-600 text-white" : "hover:bg-blue-600 hover:text-white" 
+      `flex items-center gap-7 px-3 py-2 rounded-xl euclid-medium transition-colors duration-200 text-xl sm:text-xl ${
+        isActive ? "bg-[#0527E6] text-white" : "hover:bg-[#0527E6] hover:text-white"
       }`
     }
   >
