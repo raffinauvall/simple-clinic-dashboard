@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+*::-webkit-scrollbar {
+    display: none;
+}
 .bg-body{
     background-color: #DFDAF7;
 }
