@@ -7,6 +7,9 @@ import DeleteConfirmationModal from "../modals/DeleteConfirmationModal"
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faTrash, faEdit } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import patientLogo from "../../assets/img/patient_logo.png"
+import doctorLogo from "../../assets/img/doctor_logo.png"
+import appointmentLogo from "../../assets/img/appointment_logo.png"
 library.add(faTrash, faEdit)
 
 const Body = () => {
@@ -29,6 +32,13 @@ const Body = () => {
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [selectedDeleteId, setSelectedDeleteId] = useState(null);
 
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour >= 18) return "Good Night"
+    if (hour >= 15) return "Good Evening"
+    if (hour >= 12) return "Good Afternoon"
+    return "Good Morning"
+  }
 
 
   const handleSuccess = () => {
@@ -60,26 +70,45 @@ const Body = () => {
   return (
     <div className="p-4 sm:p-6">
       <div className="text-2xl sm:text-3xl font-bold text-black mb-4 sm:mb-5 euclid-bold">
-        Good Night, admin 
+        {getGreeting()}, admin 
       </div>
-      <div className="flex justify-center gap-5 mb-6">
-        <div className="patient bg-white h-40 rounded-xl w-100 p-5">
-          <div className="text-xl euclid-medium">
-            Patient
-          </div>
-        </div>
-        <div className="doctor bg-white h-40 rounded-xl w-100"></div>
-        <div className="appointment bg-white h-40 rounded-xl w-100"></div>
+      <div className="overflow-x-auto md:overflow-visible">
+  <div className="flex md:grid md:grid-cols-3 gap-5 mb-6 w-max md:w-full">
+    <div className="min-w-[250px] md:min-w-0 bg-white h-40 rounded-xl p-5 border-b-[9px] border-[#0527E6]">
+      <div className="flex justify-between mb-4">
+        <div className="text-xl text-gray-500 euclid-medium">Patient</div>
+        <img src={patientLogo} width={30} alt="" />
       </div>
+      <div className="text-5xl euclid-semibold">172</div>
+    </div>
+
+    <div className="min-w-[250px] md:min-w-0 bg-white h-40 rounded-xl p-5 border-b-[9px] border-[#059FE6]">
+      <div className="flex justify-between mb-4">
+        <div className="text-xl text-gray-500 euclid-medium">Doctor</div>
+        <img src={doctorLogo} width={30} alt="" />
+      </div>
+      <div className="text-5xl euclid-semibold">70</div>
+    </div>
+
+    <div className="min-w-[250px] md:min-w-0 bg-white h-40 rounded-xl p-5 border-b-[9px] border-[#6378F3]">
+      <div className="flex justify-between mb-4">
+        <div className="text-xl text-gray-500 euclid-medium">Appointment</div>
+        <img src={appointmentLogo} width={30} alt="" />
+      </div>
+      <div className="text-5xl euclid-semibold">17</div>
+    </div>
+  </div>
+</div>
+
       <div className="content flex">
         <div className="recent w-full  bg-white rounded-xl shadow-sm p-4 overflow-x-auto">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
-            <div className="text-xl sm:text-2xl font-bold text-black">
+            <div className="text-xl sm:text-2xl euclid-semibold font-bold text-black">
               Patient
             </div>
             <button
               onClick={() => setIsCreateOpen(true)}
-              className="w-full sm:w-auto px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm sm:text-base"
+              className="w-full euclid-medium sm:w-auto px-4 py-2 bg-[#2F4EFC] text-white rounded hover:bg-blue-600 text-sm sm:text-base"
             >
               Tambah Pasien
             </button>
@@ -92,32 +121,32 @@ const Body = () => {
           )}
 
           <table className="min-w-full table-auto md:table-auto">
-            <thead>
-              <tr className="bg-gray-200 text-sm sm:text-base font-euclid">
+            <thead className="">
+              <tr className="bg-[#D9D9D9] rounded-sm text-sm sm:text-base euclid-semibold">
+                <th className="p-2 text-left">ID</th>
                 <th className="p-2 text-left">Name</th>
                 <th className="p-2 text-left">Gender</th>
                 <th className="p-2 text-left">Phone</th>
-                <th className="p-2 text-left">Address</th>
                 <th className="p-2 text-left">Action</th>
               </tr>
             </thead>
            <tbody>
   {patients.length === 0 ? (
     <tr>
-      <td colSpan="5" className="text-center text-gray-500 py-4">
+      <td colSpan="5" className="text-center text-gray-500 py-4 euclid-medium">
         Belum ada pasien.
       </td>
     </tr>
   ) : (
     patients.map((patient) => (
-      <tr key={patient.id} className="border-b text-sm sm:text-base">
+      <tr key={patient.id} className="text-sm sm:text-base euclid-medium">
+        <td className="p-2">{patient.id}</td>
         <td className="p-2">{patient.name}</td>
         <td className="p-2">{patient.gender}</td>
         <td className="p-2">{patient.phone}</td>
-        <td className="p-2">{patient.address}</td>
         <td className="p-2 space-x-2">
           <button
-            className="bg-blue-500 px-2 py-1 rounded-sm text-white hover:bg-blue-800"
+            className="bg-[#2F4EFC] px-2 py-1 rounded-lg text-white hover:bg-blue-900"
             onClick={() => {
               setSelectedPatient(patient);
               setIsEditOpen(true);
@@ -126,7 +155,7 @@ const Body = () => {
             <FontAwesomeIcon icon="edit" />
           </button>
           <button
-            className={`bg-red-500 px-2 py-1 rounded-sm text-white hover:bg-red-800 ${
+            className={`bg-red-500 px-2 py-1 rounded-lg text-white hover:bg-red-800 ${
               isDeleteLoading ? "opacity-50 cursor-not-allowed" : ""
             }`}
             onClick={() => onDelete(patient.id)}
