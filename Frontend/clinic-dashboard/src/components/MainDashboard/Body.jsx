@@ -79,7 +79,7 @@ const Body = () => {
         <div className="text-xl text-gray-500 euclid-medium">Patient</div>
         <img src={patientLogo} width={30} alt="" />
       </div>
-      <div className="text-5xl euclid-semibold">172</div>
+      <div className="text-5xl euclid-semibold">{patients.length}</div>
     </div>
 
     <div className="min-w-[250px] md:min-w-0 bg-white h-40 rounded-xl p-5 border-b-[9px] border-[#059FE6]">
@@ -87,7 +87,7 @@ const Body = () => {
         <div className="text-xl text-gray-500 euclid-medium">Doctor</div>
         <img src={doctorLogo} width={30} alt="" />
       </div>
-      <div className="text-5xl euclid-semibold">70</div>
+      <div className="text-5xl euclid-semibold"></div>
     </div>
 
     <div className="min-w-[250px] md:min-w-0 bg-white h-40 rounded-xl p-5 border-b-[9px] border-[#6378F3]">
