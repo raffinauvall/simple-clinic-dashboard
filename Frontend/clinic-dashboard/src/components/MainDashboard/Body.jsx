@@ -7,6 +7,7 @@ import DeleteConfirmationModal from "../modals/DeleteConfirmationModal";
 import DashboardGreeting from "./DashboardGreeting";
 import DashboardCards from "./StatsCard";
 import PatientTable from "./PatientTable";
+import useDoctor from "../../hooks/doctor/useDoctor";
 
 const Body = () => {
   const {
@@ -15,6 +16,14 @@ const Body = () => {
     error: patientError,
     refetch,
   } = usePatient();
+
+  const{
+    doctors,
+    loading: isDoctorLoading,
+    error: doctorError,
+  } = useDoctor();
+
+  
 
   const {
     handleDelete,
@@ -49,13 +58,19 @@ const Body = () => {
     });
   };
 
+  const doctorCount = isDoctorLoading ? "Loading..." : (doctors && doctors.length) || 0;
+
+
   if (isPatientLoading) return <div>Loading data pasien...</div>;
   if (patientError) return <div>Error saat ambil data pasien</div>;
 
   return (
     <div className="p-4 sm:p-6">
       <DashboardGreeting />
-      <DashboardCards patientCount={patients.length} />
+      <DashboardCards
+      patientCount={patients.length}
+      doctorCount={isDoctorLoading ? "Loading..." : doctors?.length ?? 0}
+      />
       <PatientTable
         patients={patients}
         isDeleteLoading={isDeleteLoading}
