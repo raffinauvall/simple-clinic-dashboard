@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const PatientTable = ({
   patients,
@@ -54,7 +55,7 @@ const PatientTable = ({
                     className="bg-[#2F4EFC] px-2 py-1 rounded-lg text-white hover:bg-blue-900"
                     onClick={() => onEdit(patient)}
                   >
-                    <FontAwesomeIcon icon="edit" />
+                    <FontAwesomeIcon icon={faEdit} />
                   </button>
                   <button
                     className={`bg-red-500 px-2 py-1 rounded-lg text-white hover:bg-red-800 ${
@@ -63,7 +64,7 @@ const PatientTable = ({
                     onClick={() => onDelete(patient.id)}
                     disabled={isDeleteLoading}
                   >
-                    <FontAwesomeIcon icon="trash" />
+                    <FontAwesomeIcon icon={faTrash} />
                   </button>
                 </td>
               </tr>
