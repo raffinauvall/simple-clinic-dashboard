@@ -8,6 +8,7 @@ import DashboardGreeting from "./DashboardGreeting";
 import DashboardCards from "./StatsCard";
 import PatientTable from "./PatientTable";
 import useDoctor from "../../hooks/doctor/useDoctor";
+import useAppointment from "../../hooks/appointment/useAppointment";
 
 const Body = () => {
   const {
@@ -23,6 +24,11 @@ const Body = () => {
     error: doctorError,
   } = useDoctor();
 
+  const {
+    appointments,
+    loading: isAppointmentLoading,
+    error: appointmentError,
+  } = useAppointment();
   
 
   const {
@@ -58,7 +64,6 @@ const Body = () => {
     });
   };
 
-  const doctorCount = isDoctorLoading ? "Loading..." : (doctors && doctors.length) || 0;
 
 
   if (isPatientLoading) return <div>Loading data pasien...</div>;
@@ -70,6 +75,7 @@ const Body = () => {
       <DashboardCards
       patientCount={patients.length}
       doctorCount={isDoctorLoading ? "Loading..." : doctors?.length ?? 0}
+      appointmentCount={isAppointmentLoading ? "Loading..." : appointments?.length ?? 0}
       />
       <PatientTable
         patients={patients}
