@@ -4,6 +4,7 @@ import {
   faUserInjured,
   faCalendarCheck,
   faMoneyBillWave,
+  faUserDoctor,
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 
@@ -31,6 +32,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         <nav className="flex flex-col gap-5 p-4 text-black">
           <SidebarItem icon={faTachometerAlt} label="Dashboard" to="/" />
           <SidebarItem icon={faUserInjured} label="Patients" to="/patients" />
+          <SidebarItem icon={faUserDoctor} label="Doctors" to="/doctors" />
           <SidebarItem icon={faCalendarCheck} label="Appointments" to="/appointments" />
           <SidebarItem icon={faMoneyBillWave} label="Payments" to="/payments" />
         </nav>
