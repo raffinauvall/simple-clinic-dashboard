@@ -27,6 +27,14 @@ function App() {
             </Layout>
           }
         />
+         <Route
+          path="/doctors"
+          element={
+            <Layout>
+            <Patient />
+            </Layout>
+          }
+        />
         <Route
           path="/appointments"
           element={
