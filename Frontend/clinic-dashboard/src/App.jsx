@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Layout from "./components/Layout";
 import { Toaster } from "sonner";
+import Patient from "./pages/Patient";
 
 function App() {
   return (
@@ -15,6 +16,30 @@ function App() {
           element={
             <Layout>
               <Dashboard />
+            </Layout>
+          }
+        />
+        <Route
+          path="/patients"
+          element={
+            <Layout>
+            <Patient />
+            </Layout>
+          }
+        />
+        <Route
+          path="/appointments"
+          element={
+            <Layout>
+            <Patient />
+            </Layout>
+          }
+        />
+        <Route
+          path="/payments"
+          element={
+            <Layout>
+            <Patient />
             </Layout>
           }
         />
