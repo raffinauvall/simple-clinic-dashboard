@@ -81,6 +81,9 @@ const Body = () => {
         patients={patients}
         isDeleteLoading={isDeleteLoading}
         deleteError={deleteError}
+        onCreate={() => {
+          setIsCreateOpen(true)
+        }}
         onEdit={(patient) => {
           setSelectedPatient(patient);
           setIsEditOpen(true);

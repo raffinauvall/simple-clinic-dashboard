@@ -5,6 +5,7 @@ const PatientTable = ({
   patients,
   isDeleteLoading,
   deleteError,
+  onCreate,
   onEdit,
   onDelete,
 }) => {
@@ -13,7 +14,7 @@ const PatientTable = ({
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4">
         <div className="text-xl sm:text-2xl euclid-semibold font-bold text-black">Patient</div>
         <button
-          onClick={onEdit}
+          onClick={onCreate}
           className="w-full euclid-medium sm:w-auto px-4 py-2 bg-[#2F4EFC] text-white rounded hover:bg-blue-600 text-sm sm:text-base"
         >
           Tambah Pasien
