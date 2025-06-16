@@ -19,6 +19,7 @@ class PatientController extends Controller
             'gender' => 'required|string',
             'birth_date' => 'required|date',
             'phone' => 'required|string',
+            'email' => 'required|string',
             'address' => 'required|string'
         ]);
 
@@ -52,6 +53,7 @@ class PatientController extends Controller
             'gender' => 'required|string',
             'birth_date' => 'required|date',
             'phone' => 'required|string',
+            'email' => 'required|string',
             'address' => 'required|string'
         ]);
 
