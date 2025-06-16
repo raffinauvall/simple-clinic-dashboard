@@ -19,6 +19,7 @@ const EditPatientModal = ({ isOpen, onClose, patient, onSuccess }) => {
         name: patient.name || "",
         gender: patient.gender || "",
         phone: patient.phone || "",
+        email: patient.email || "",
         address: patient.address || "",
         birth_date: patient.birth_date
           ? new Date(patient.birth_date).toISOString().slice(0, 10)
@@ -89,7 +90,7 @@ const EditPatientModal = ({ isOpen, onClose, patient, onSuccess }) => {
           name="email"
           value={formData.email}
           placeholder="Email"
-          onChange={handleChange}
+          onChange={onChange}
           className="w-full p-2 border rounded"
           required
         />
