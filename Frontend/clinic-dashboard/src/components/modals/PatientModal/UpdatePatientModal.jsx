@@ -6,6 +6,7 @@ const EditPatientModal = ({ isOpen, onClose, patient, onSuccess }) => {
     name: "",
     gender: "",
     phone: "",
+    email: "",
     address: "",
     birth_date: "",
   });
@@ -83,6 +84,15 @@ const EditPatientModal = ({ isOpen, onClose, patient, onSuccess }) => {
             placeholder="Phone"
             className="border p-2 w-full"
           />
+           <input
+          type="email"
+          name="email"
+          value={formData.email}
+          placeholder="Email"
+          onChange={handleChange}
+          className="w-full p-2 border rounded"
+          required
+        />
           <input
             name="address"
             value={formData.address}

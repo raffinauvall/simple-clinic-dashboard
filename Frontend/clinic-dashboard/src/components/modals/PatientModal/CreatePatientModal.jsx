@@ -10,6 +10,7 @@ const CreatePatientModal = ({ isOpen, onClose, onSuccess }) => {
     gender: "",
     birth_date: "",
     phone: "",
+    email: "",
     address: "",
   });
 
@@ -55,6 +56,14 @@ const CreatePatientModal = ({ isOpen, onClose, onSuccess }) => {
           type="number"
           name="phone"
           placeholder="Nomor Telepon"
+          onChange={handleChange}
+          className="w-full p-2 border rounded"
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
           onChange={handleChange}
           className="w-full p-2 border rounded"
           required
