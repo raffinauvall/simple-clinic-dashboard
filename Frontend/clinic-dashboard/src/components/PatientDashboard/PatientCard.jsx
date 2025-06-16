@@ -8,7 +8,7 @@ const PatientCard = ({
 }) => {
 
     return (
-         <div className="bg-white p-4 rounded-xl shadow-md flex justify-between items-start min-w-[100%]">
+         <div className="bg-white p-4 rounded-xl shadow-md flex justify-between items-center min-w-[100%]">
       <div>
         <h3 className="text-2xl euclid-semibold">{patient.name}</h3>
         <p className="text-sm text-gray-600 euclid-regular">{patient.email}</p>
