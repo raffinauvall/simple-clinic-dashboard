@@ -4,6 +4,7 @@ import usePatient from "../../hooks/patient/usePatient";
 import useDeletePatient from "../../hooks/patient/useDeletePatient";
 import EditPatientModal from "../modals/PatientModal/UpdatePatientModal";
 import DeleteConfirmationModal from "../modals/DeleteConfirmationModal";
+import DetailPatientModal from "../modals/PatientModal/DetailPatientModal";
 
 const PatientBody = () => {
   const {
@@ -21,15 +22,21 @@ const PatientBody = () => {
 
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [selectedPatient, setSelectedPatient] = useState(null);
-  const [openDetailModal, setOpenDetailModal] = useState(false);
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [selectedDeleteId, setSelectedDeleteId] = useState(null);
+  const [selectedPatientId, setSelectedPatientId] = useState(null);
 
   const handleSuccess = () => {
     refetch();
     setIsEditOpen(false);
     setSelectedPatient(null);
   };
+
+  const onDetail = (id) => {
+    setSelectedPatientId(id)
+    setIsDetailOpen(true);
+  }
 
   const onDelete = (id) => {
     setSelectedDeleteId(id);
@@ -60,15 +67,22 @@ const PatientBody = () => {
               setIsEditOpen(true);
             }}
             onDelete={onDelete}
-            onDetail={(p) => {
-              console.log("Detail clicked", p);
-            }}
+            onDetail={() => onDetail(patient.id)}
           />
         ))}
         {patients.length === 0 && (
           <div className="text-gray-500 col-span-full">Belum ada pasien yang terdaftar.</div>
         )}
       </div>
+
+      <DetailPatientModal 
+        isOpen={isDetailOpen}
+        onClose={() => {
+          setIsDetailOpen(false)
+          setSelectedPatientId(null)
+        }}
+        patientId={selectedPatientId}
+      />
 
       <EditPatientModal
         isOpen={isEditOpen}
