@@ -1,8 +1,15 @@
-// Navigation.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Navigation = ({ onChangeView }) => {
-  const [activeView, setActiveView] = useState("grid");
+  const [activeView, setActiveView] = useState(() => {
+    // Ambil view yang terakhir disimpan, default ke 'grid' jika tidak ada
+    return localStorage.getItem("activeView") || "grid";
+  });
+
+  // Sync state ke localStorage setiap kali berubah
+  useEffect(() => {
+    localStorage.setItem("activeView", activeView);
+  }, [activeView]);
 
   const handleViewChange = (view) => {
     setActiveView(view);
