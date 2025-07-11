@@ -6,7 +6,7 @@ import EditPatientModal from "../modals/PatientModal/UpdatePatientModal";
 import DeleteConfirmationModal from "../modals/DeleteConfirmationModal";
 import DashboardGreeting from "./DashboardGreeting";
 import DashboardCards from "./StatsCard";
-import PatientTable from "./PatientTable";
+import PatientTable from "../PatientTable";
 import useDoctor from "../../hooks/doctor/useDoctor";
 import useAppointment from "../../hooks/appointment/useAppointment";
 
