@@ -1,12 +1,13 @@
 import { useState } from "react";
 import PatientCard from "./PatientCard";
-import PatientTable from "./PatientTable"; // <== ini penting!
+import PatientTable from "../PatientTable";
 import usePatient from "../../hooks/patient/usePatient";
 import useDeletePatient from "../../hooks/patient/useDeletePatient";
 import EditPatientModal from "../modals/PatientModal/UpdatePatientModal";
 import DeleteConfirmationModal from "../modals/DeleteConfirmationModal";
 import DetailPatientModal from "../modals/PatientModal/DetailPatientModal";
 import Navigation from "./Navigation";
+import CreatePatientModal from "../modals/PatientModal/CreatePatientModal";
 
 const PatientBody = () => {
   const {
@@ -28,6 +29,7 @@ const PatientBody = () => {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [selectedDeleteId, setSelectedDeleteId] = useState(null);
   const [selectedPatientId, setSelectedPatientId] = useState(null);
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [view, setView] = useState("grid");
 
   const handleSuccess = () => {
@@ -92,7 +94,7 @@ const PatientBody = () => {
           onDelete={onDelete}
           onCreate={() => {
             setSelectedPatient(null); // untuk create pasien baru
-            setIsEditOpen(true);
+            setIsCreateOpen(true);
           }}
           isDeleteLoading={isDeleteLoading}
           deleteError={deleteError}
@@ -108,6 +110,13 @@ const PatientBody = () => {
         patientId={selectedPatientId}
       />
 
+      <CreatePatientModal
+        isOpen={isCreateOpen}
+        onClose={() => {
+          setIsCreateOpen(false)
+        }}
+        onSuccess={handleSuccess}
+      />
       <EditPatientModal
         isOpen={isEditOpen}
         onClose={() => {
