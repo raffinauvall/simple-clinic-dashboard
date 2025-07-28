@@ -33,7 +33,7 @@ class PatientController extends Controller
 
 
     public function show($id){
-        $patients = Patient::find($id);
+        $patients = Patient::with('medicalRecords')->find($id);
         if(!$patients){
             return response()->json(['message' => 'Patient not found'], 404);
         }
@@ -41,6 +41,7 @@ class PatientController extends Controller
         return response()->json($patients);
     }
 
+    
     public function update(Request $request, $id)
     {
         $patients = Patient::find($id);
