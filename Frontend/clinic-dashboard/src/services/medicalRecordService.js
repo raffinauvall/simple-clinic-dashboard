@@ -6,7 +6,7 @@ export const getMedicalRecord = async () => {
 }
 
 export const createMedicalRecord = async (data) => {
-    const response = await api.post("/medical-records");
+    const response = await api.post("/medical-records", data);
     return response.data
 }
 
