@@ -62,14 +62,21 @@ const PatientBody = () => {
 
   return (
     <div className="pt-4">
+      
       <Navigation onChangeView={setView} />
-
+     <button className="btn p-3 w-full mb-3 bg-[#0527E6] rounded-xl shadow-sm text-white euclid-regular" onClick={() => setIsCreateOpen(true)}>
+        Tambah Pasien
+      </button>
       {view === "grid" ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {patients.map((patient) => (
             <PatientCard
               key={patient.id}
               patient={patient}
+               onCreate={() => {
+                setSelectedPatient(null); // untuk create pasien baru
+                setIsCreateOpen(true);
+              }}
               onEdit={(p) => {
                 setSelectedPatient(p);
                 setIsEditOpen(true);
@@ -93,7 +100,7 @@ const PatientBody = () => {
           }}
           onDelete={onDelete}
           onCreate={() => {
-            setSelectedPatient(null); // untuk create pasien baru
+            setSelectedPatient(null);
             setIsCreateOpen(true);
           }}
           isDeleteLoading={isDeleteLoading}
@@ -136,6 +143,7 @@ const PatientBody = () => {
         onConfirm={confirmDelete}
         loading={isDeleteLoading}
       />
+     
     </div>
   );
 };
