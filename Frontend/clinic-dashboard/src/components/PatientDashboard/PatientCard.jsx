@@ -2,6 +2,7 @@ import { useState } from "react";
 
 const PatientCard = ({
     patient,
+    onCreate,
     onEdit,
     onDelete,
     onDetail
