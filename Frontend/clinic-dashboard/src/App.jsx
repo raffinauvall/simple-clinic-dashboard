@@ -3,6 +3,7 @@ import Dashboard from "./pages/Dashboard";
 import Layout from "./components/Layout";
 import { Toaster } from "sonner";
 import Patient from "./pages/Patient";
+import DetailPatient from "./pages/DetailPatient";
 
 function App() {
   return (
@@ -24,6 +25,14 @@ function App() {
           element={
             <Layout>
             <Patient />
+            </Layout>
+          }
+        />
+        <Route
+          path="/patients/:id"
+          element={
+            <Layout>
+              <DetailPatient />
             </Layout>
           }
         />
