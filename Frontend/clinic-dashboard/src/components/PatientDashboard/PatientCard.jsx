@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const PatientCard = ({
     patient,
@@ -7,6 +8,8 @@ const PatientCard = ({
     onDelete,
     onDetail
 }) => {
+
+    const navigate = useNavigate();
 
     return (
          <div className="bg-white p-4 rounded-xl shadow-md flex justify-between items-center min-w-[100%]">
@@ -17,7 +20,7 @@ const PatientCard = ({
       </div>
       <div className="flex flex-col gap-2">
         <button
-          onClick={() => onDetail(patient)}
+          onClick={() => navigate(`/patients/${patient.id}`)}
           className="bg-blue-600 text-white euclid-regular px-3 py-1 rounded hover:bg-blue-700"
         >
           Detail
