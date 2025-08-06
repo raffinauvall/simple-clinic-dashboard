@@ -5,7 +5,6 @@ import usePatient from "../../hooks/patient/usePatient";
 import useDeletePatient from "../../hooks/patient/useDeletePatient";
 import EditPatientModal from "../modals/PatientModal/UpdatePatientModal";
 import DeleteConfirmationModal from "../modals/DeleteConfirmationModal";
-import DetailPatientModal from "../modals/PatientModal/DetailPatientModal";
 import Navigation from "./Navigation";
 import CreatePatientModal from "../modals/PatientModal/CreatePatientModal";
 
@@ -25,7 +24,6 @@ const PatientBody = () => {
 
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [selectedPatient, setSelectedPatient] = useState(null);
-  const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [selectedDeleteId, setSelectedDeleteId] = useState(null);
   const [selectedPatientId, setSelectedPatientId] = useState(null);
@@ -38,10 +36,6 @@ const PatientBody = () => {
     setSelectedPatient(null);
   };
 
-  const onDetail = (id) => {
-    setSelectedPatientId(id);
-    setIsDetailOpen(true);
-  };
 
   const onDelete = (id) => {
     setSelectedDeleteId(id);
@@ -82,7 +76,6 @@ const PatientBody = () => {
                 setIsEditOpen(true);
               }}
               onDelete={onDelete}
-              onDetail={() => onDetail(patient.id)}
             />
           ))}
           {patients.length === 0 && (
@@ -107,15 +100,6 @@ const PatientBody = () => {
           deleteError={deleteError}
         />
       )}
-
-      <DetailPatientModal
-        isOpen={isDetailOpen}
-        onClose={() => {
-          setIsDetailOpen(false);
-          setSelectedPatientId(null);
-        }}
-        patientId={selectedPatientId}
-      />
 
       <CreatePatientModal
         isOpen={isCreateOpen}
